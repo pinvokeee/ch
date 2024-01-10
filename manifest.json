@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Hello Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "permissions": ["tabs", "sidePanel", "storage"],
+    "host_permissions": ["https://time.is/ja/*"],
+    "action": {
+        "default_popup": "popup.html"
+    },
+
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "side_panel": {
+        "default_path": "popup.html"
+    },    
+
+    "content_scripts": [
+        {
+            "matches": [
+                "https://time.is/ja/*"
+            ],
+            "js": [
+                "content_scripts.js"
+            ]
+        },
+
+        {
+            "matches": [
+                "file:///*/stateWindow.html"
+            ],
+            "js": [
+                "contentsc_stateWindow.js"
+            ]
+        }
+    ]
+}

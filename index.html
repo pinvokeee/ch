@@ -1,0 +1,37 @@
+<html>
+
+<body>
+
+    <button id="test">sss</button>
+
+    <script>
+
+        document.querySelector("#test").addEventListener("click", async () => {
+            const element = document.querySelector("#test");
+
+            const pipWindow = await documentPictureInPicture.requestWindow({
+                width: 108,
+                height: 108,
+                copyStyleSheets: true,
+            });
+
+        })
+
+
+        window.addEventListener("message", (event) => {
+               
+                console.log(event);
+
+            // if (event.origin.startsWith("chrome://extensions")) return;
+
+                // event.source は popup
+                // event.data は "hi there yourself!  the secret response is: rheeeeet!"
+            },
+            false,
+        );
+
+    </script>
+
+</body>
+
+</html>

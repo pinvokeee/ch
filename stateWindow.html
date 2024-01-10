@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link href="stateWindow.css" rel="stylesheet" type="text/css" media="all">
+    </head>
+    <body>
+
+        <div class="state" id="state">状態：未取得</div>
+        <button id="button_topmost">最前面で表示</button>
+
+        <script>
+
+            let currentDocument = document;
+            
+            window.addEventListener("message", (event) => {
+                if (event.source !== window) return;
+                currentDocument.querySelector("#state").innerText = event.data.text;
+
+            }, false);
+
+            document.querySelector("#button_topmost").addEventListener("click", async () => {
+
+                const element = document.querySelector("#state");
+
+                const pipWindow = await documentPictureInPicture.requestWindow({
+                    width: 108,
+                    height: 108,
+                    copyStyleSheets: true,
+                });
+
+                currentDocument = pipWindow.document;
+                currentDocument.head.append(document.head);
+                currentDocument.body.append(element);
+            })
+
+            const getCurrentDocument = () => {
+                return currentDocument;
+            }
+
+        </script>
+
+    </body>
+</html>
